@@ -7,9 +7,7 @@ import React from 'react';
  */
 export const Card = (props) => {
   const { name, picture, price, isActive} = props;
-  console.log(isActive)
-  const name_class = isActive?'card':'card inactive';
-  console.log(name_class)
+  const name_class = isActive==="true"?'card':'card inactive';
   return (
     <div className={name_class}>
       <div className='card-header'>

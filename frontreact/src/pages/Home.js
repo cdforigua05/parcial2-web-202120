@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from '../components/Card';
-
+import { FormattedMessage } from 'react-intl';
 
 export const Home = ({ searchKey }) => {
   const [products, setProducts] = useState(null);
   useEffect(()=>{
-  fetch('http://localhost:3001/api/products')
+  fetch(`http://localhost:3001/api/products?q=`+searchKey)
   .then(responde => responde.json())
   .then(data => setProducts(data.results))
-  },[])
-  console.log(products)
+  },[searchKey])
   return (
     <section id='home'>
       <div className='home-container'>
-        <h1>Gallery</h1>
+        <h1>
+          <FormattedMessage id="gallery"/>
+          </h1>
         <div className='home-card'>
         {products && products.map((product)=>(
               <div >
               <Card
-              key={product._id}
+              key={product.id}
               name={product.name}
               picture = {product.picture}
               price = {product.price}
